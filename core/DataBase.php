@@ -2,13 +2,12 @@
 
 namespace Core;
 
-
 use PDO;
 use PDOException;
 
 class DataBase
 {
-    public function getDataBase()
+    static public function getDataBase()
     {
         $conf = include_once __DIR__ . "/../app/database.php";
 

@@ -20,5 +20,8 @@
     "require": {
 
         "php" : ">=5.4"
+    },
+    "scripts":{
+        "server":"php -S localhost:8080 public/index.php"
     }
 }

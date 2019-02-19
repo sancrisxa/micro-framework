@@ -16,7 +16,7 @@ return [
      'mysql' => [
 
         'host' => 'localhost',
-        'database' => 'curso_microframework',
+        'database' => 'micro_framework',
         'user' => 'root',
         'pass' => '',
         'charset' => 'utf8',
