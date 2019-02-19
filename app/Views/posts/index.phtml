@@ -6,7 +6,9 @@
     </div>
     <?php foreach ($this->view->posts as $post) : ?>
         <div class="row">
-            <h3 class="h3"><?php echo $post->title;?></h3>
+            <a href="/post/<?php echo $post->id;?>/show">
+                <h3 class="h3"><?php echo $post->title;?></h3>
+            </a>
             <p class="text-justify"><?php echo $post->content;?></p>
         </div>
     <?php endforeach;?>
