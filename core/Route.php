@@ -93,8 +93,9 @@ class Route
         if ($found) {
 
             $controller = Container::newController($controller);
-
             switch (count($param)) {
+
+                
 
                 case 1:
 
@@ -114,6 +115,7 @@ class Route
                 default:
 
                     $controller->$action($this->getRequest());
+                    break;
             }
 
         } else {
