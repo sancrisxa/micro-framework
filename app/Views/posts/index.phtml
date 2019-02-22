@@ -10,6 +10,9 @@
                 <h3 class="h3"><?php echo $post->title;?></h3>
             </a>
             <p class="text-justify"><?php echo $post->content;?></p>
+            <p class="text-right">
+                <a href="/post/<?php echo $post->id;?>/edit" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil">editar</i></a>
+            </p>
         </div>
     <?php endforeach;?>
 </div>

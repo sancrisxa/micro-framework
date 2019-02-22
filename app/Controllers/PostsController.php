@@ -4,25 +4,73 @@ namespace App\Controllers;
 
 use Core\BaseController;
 use Core\Container;
+use Core\Redirect;
 
 
 class PostsController extends BaseController
 {
 
+    private $post;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->post = Container::getModel("Post");
+    }
+
     public function index()
     {
-        $this->setPageTitle('Posts');
-        $model = Container::getModel("Post");
-        $this->view->posts = $model->all();
+        $this->setPageTitle('Posts');   
+        $this->view->posts = $this->post->all();
         $this->renderView('posts/index', 'layout');
         
     }
 
     public function show($id)
     {
-        $model = Container::getModel("Post");
-        $this->view->post = $model->find($id); 
+        $this->view->post = $this->post->find($id); 
         $this->setPageTitle("{$this->view->post->title}");
         $this->renderView('posts/show', 'layout');
+    }
+
+    public function create()
+    {
+        $this->setPageTitle('New post');
+        $this->renderView('posts/create', 'layout');
+    }
+
+    public function store($request)
+    {
+       $data = [
+
+            'title' => $request->post->title,
+            'content' => $request->post->content
+
+       ]; 
+        
+       if ($this->post->create($data)) {
+
+           Redirect::route('/posts');
+
+       } else {
+
+            echo "Erro ao inserir no banco de dados";
+
+       }
+       
+
+    }
+
+    public function edit($id)
+    {
+        $this->view->post = $this->post->find($id);
+        $this->setPageTitle('Edit post - ' . $this->view->post->title);
+        $this->renderView('posts/edit', 'layout');
+    }
+
+    public function update($id, $request)
+    {
+
+
     }
 }
