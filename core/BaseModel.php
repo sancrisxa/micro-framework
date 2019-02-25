@@ -116,5 +116,15 @@ abstract class BaseModel
         return [$strKeysBinds, $binds, $values];
 
     }
+
+    public function delete($id)
+    {
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
     
 }
