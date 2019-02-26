@@ -11,15 +11,21 @@ class Session
 
     public static function get($key)
     {
-        if($_SESSION[$key]) {
+        
+        if (empty($_SESSION)) {
+
+            return false;
+
+        } else {
 
             return $_SESSION[$key];
         }
 
-        return false;
+
+    
     } 
 
-    public function destroy($keys)
+    public static function destroy($keys)
     {
         if (is_array($keys)) {
 

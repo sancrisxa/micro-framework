@@ -1,12 +1,11 @@
 <div class="container">
-    <div class="row">
-        <h2 class="h2"><?php $this->getPageTitle();?></h2>
-        <a href="/post/create" class="btn btn-primary pull-right">
-            New post
-            <i class="glyphicon glyphicon-plus-sign"></i>
-        </a>
-    </div>
-
+        <h2 class="h2"><?php echo $this->getPageTitle();?></h2>
+        <div class="float-right">
+            <a href="/post/create" class="btn btn-primary pull-right">
+                New post
+                <i class="glyphicon glyphicon-plus-sign"></i>
+            </a>
+        </div><br>
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget odio ut metus porta convallis. Curabitur enim est, 

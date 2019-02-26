@@ -1,19 +1,21 @@
 <div class="container">
-    <div class="row">
-        <h1 class="h1">
-            <?php $this->getPageTitle();?>
-        </h1>
-    </div>
+ 
+    <h1 class="h1">
+        <?php $this->getPageTitle();?>
+    </h1>
+    <?php $this->renderView('alerts/_success');?>
+    <?php $this->renderView('alerts/_errors');?>
     <?php foreach ($this->view->posts as $post) : ?>
-        <div class="row">
+        <h3 class="h3">
             <a href="/post/<?php echo $post->id;?>/show">
-                <h3 class="h3"><?php echo $post->title;?></h3>
+                <?php echo $post->title;?>
             </a>
-            <p class="text-justify"><?php echo $post->content;?></p>
-            <p class="text-right">
-                <a href="/post/<?php echo $post->id;?>/edit" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil">editar</i></a>
-                <a href="/post/<?php echo $post->id;?>/delete" class="btn btn-danger btn-xs" onclick="return confirm('Deletar este Post?')"><i class="glyphicon glyphicon-remove-sign">excluir</i></a>
-            </p>
-        </div>
+        </h3>
+        <p class="text-justify"><?php echo $post->content;?></p>
+        <p class="text-right">
+            <a href="/post/<?php echo $post->id;?>/edit" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-pencil">editar</i></a>
+            <a href="/post/<?php echo $post->id;?>/delete" class="btn btn-danger btn-xs" onclick="return confirm('Deletar este Post?')"><i class="glyphicon glyphicon-remove-sign">excluir</i></a>
+        </p>
+        <hr>
     <?php endforeach;?>
 </div>
