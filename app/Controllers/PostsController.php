@@ -6,6 +6,7 @@ use Core\BaseController;
 use Core\Container;
 use Core\Redirect;
 Use Core\Session;
+use Core\Validator;
 
 
 class PostsController extends BaseController
@@ -77,6 +78,13 @@ class PostsController extends BaseController
 
     public function edit($id)
     {
+        if (Session::get('errors')) {
+
+            $this->view->errors = Session::get('errors');
+            Session::destroy('errors');
+        }
+
+
         $this->view->post = $this->post->find($id);
         $this->setPageTitle('Edit post - ' . $this->view->post->title);
         return $this->renderView('posts/edit', 'layout');
@@ -91,6 +99,21 @@ class PostsController extends BaseController
             'content' => $request->post->content
 
        ]; 
+
+       $rules = [
+
+            'title' => 'required',
+            'content' => 'required'
+
+       ];
+
+       $validator = Validator::make($data, $rules);
+
+       if ($validator) {
+
+
+            return Redirect::route("/post/{$id}/edit");
+       }
         
        if ($this->post->update($data, $id)) {
 
