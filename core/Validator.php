@@ -1,6 +1,7 @@
 <?php
 
 namespace Core;
+use Core\Session;
 
 class Validator
 {
@@ -73,11 +74,12 @@ class Validator
         if ($errors) {
 
             Session::set('errors', $errors);
+            Session::set('inputs', $data);
             return true;
 
         } else {
 
-            Session:destroy('errors');
+            Session:destroy(['errors', 'inputs']);
             return false;
 
         }

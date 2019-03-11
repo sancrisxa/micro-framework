@@ -84,6 +84,12 @@ class PostsController extends BaseController
             Session::destroy('errors');
         }
 
+        if (Session::get('inputs')) {
+
+            $this->view->inputs = Session::get('inputs');
+            Session::destroy('errors');
+        }
+
 
         $this->view->post = $this->post->find($id);
         $this->setPageTitle('Edit post - ' . $this->view->post->title);
@@ -100,14 +106,7 @@ class PostsController extends BaseController
 
        ]; 
 
-       $rules = [
-
-            'title' => 'required',
-            'content' => 'required'
-
-       ];
-
-       $validator = Validator::make($data, $rules);
+       $validator = Validator::make($data, $this->post->rules());
 
        if ($validator) {
 
