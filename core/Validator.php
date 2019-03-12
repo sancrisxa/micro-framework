@@ -11,59 +11,110 @@ class Validator
         $errors = null;
 
         foreach ($rules as $ruleKey => $ruleValue) {
- 
-            foreach ($data as $dataKey => $dataValue) {
 
-                if ($ruleKey == $dataKey) {
+            if(strpos($ruleValue, ":")) {
 
-                    switch ($ruleValue) {
+                $items = explode(":", $ruleValue);
 
-                        case 'required' :
+                foreach ($data as $dataKey => $dataValue) {
 
-                            if ($dataValue == ' ' || empty($dataValue)) {
+                    if ($ruleKey == $dataKey) {
 
-                                $errors["$ruleKey"] = "o campo {$ruleKey} deve ser preenchido.";
+                        switch ($items[0]) {
 
-                            }
 
-                            break;
+                            case 'min':
 
-                        case 'email' :
+                                if (strlen($dataValue) < $items[1]) {
 
-                            if (!filter_var($dataValue, FILTER_VALIDATE_EMAIL)) {
+                                    $errors["$ruleKey"] = "o campo {$ruleKey} deve ter um minimo de {$items} caracteres";
 
-                                $errors["$ruleKey"] = "O campo {$ruleKey} não é valido.";
-                                
-                            }
+                                    break;
 
-                            break;
+                                }
 
-                        case 'float' :
 
-                            if (!filter_var($dataValue, FILTER_VALIDATE_FLOAT)) {
+                            case 'max':
 
-                                $errors["$ruleKey"] = "O campo {$ruleKey} deve conter números decimal";
+                                if (strlen($dataValue) > $items[1]) {
 
-                            }
+                                    $errors["$ruleKey"] = "o campo {$ruleKey} deve ter um máximo de {$items} caracteres";
 
-                            break;
+                                    break;
 
-                        case 'int' :
+                                }
 
-                            if (!filter_var($dataValue, FILTER_VALIDATE_INT)) {
 
-                                $errors["$ruleKey"] = "O campo {$ruleKey} deve conter número inteiro";
-
-                            }
-
-                            break;
-
-                        default :
-
-                            break;
-
+                        }
 
                     }
+                }
+
+
+            } else {
+ 
+                foreach ($data as $dataKey => $dataValue) {
+
+                    if ($ruleKey == $dataKey) {
+
+                        switch ($ruleValue) {
+
+                            case 'required' :
+
+                                if ($dataValue == ' ' || empty($dataValue)) {
+
+                                    $errors["$ruleKey"] = "o campo {$ruleKey} deve ser preenchido.";
+
+                                    break;
+
+                                }
+
+                                
+
+                            case 'email' :
+
+                                if (!filter_var($dataValue, FILTER_VALIDATE_EMAIL)) {
+
+                                    $errors["$ruleKey"] = "O campo {$ruleKey} não é valido.";
+
+                                    break;
+                                    
+                                }
+
+                                
+
+                            case 'float' :
+
+                                if (!filter_var($dataValue, FILTER_VALIDATE_FLOAT)) {
+
+                                    $errors["$ruleKey"] = "O campo {$ruleKey} deve conter números decimal";
+
+                                    break;
+
+                                }
+
+                               
+
+                            case 'int' :
+
+                                if (!filter_var($dataValue, FILTER_VALIDATE_INT)) {
+
+                                    $errors["$ruleKey"] = "O campo {$ruleKey} deve conter número inteiro";
+
+                                    break;
+
+                                }
+
+                                
+
+                            default :
+
+                                break;
+
+
+                        }
+                    }
+
                 }
 
             }

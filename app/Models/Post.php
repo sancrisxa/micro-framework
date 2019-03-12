@@ -13,7 +13,7 @@ class Post extends BaseModel
         return [
             
             'title' => 'required',
-            'content' => 'required'
+            'content' => 'min:30'
             
         ];
     }

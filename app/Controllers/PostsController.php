@@ -87,7 +87,7 @@ class PostsController extends BaseController
         if (Session::get('inputs')) {
 
             $this->view->inputs = Session::get('inputs');
-            Session::destroy('errors');
+            Session::destroy('inputs');
         }
 
 
@@ -106,9 +106,7 @@ class PostsController extends BaseController
 
        ]; 
 
-       $validator = Validator::make($data, $this->post->rules());
-
-       if ($validator) {
+       if (Validator::make($data, $this->post->rules())) {
 
 
             return Redirect::route("/post/{$id}/edit");
