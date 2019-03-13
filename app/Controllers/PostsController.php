@@ -28,7 +28,9 @@ class PostsController extends BaseController
             $this->view->success = Session::get('success');
             Session::destroy('success');
 
-        }else{
+        }
+        
+        if (Session::get('errors')) {
 
             $this->view->errors = Session::get('errors');
             Session::destroy('errors');
@@ -78,16 +80,21 @@ class PostsController extends BaseController
 
     public function edit($id)
     {
+
+        
+
         if (Session::get('errors')) {
 
             $this->view->errors = Session::get('errors');
             Session::destroy('errors');
-        }
 
+        }
+        
         if (Session::get('inputs')) {
 
             $this->view->inputs = Session::get('inputs');
             Session::destroy('inputs');
+
         }
 
 
