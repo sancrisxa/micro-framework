@@ -11,17 +11,120 @@ class Validator
         $errors = null;
 
         foreach ($rules as $ruleKey => $ruleValue) {
+         
+            foreach ($data as $dataKey => $dataValue) {
 
-            if(strpos($ruleValue, ":")) {
+                if ($ruleKey == $dataKey) {
 
-                $items = explode(":", $ruleValue);
+                    $itemsValue = [];
+                    
+                    if(strpos($ruleValue, "|")) {
 
-                foreach ($data as $dataKey => $dataValue) {
 
-                    if ($ruleKey == $dataKey) {
+                        $itemsValue = explode("|", $ruleValue);
+
+                        foreach ($itemsValue as $itemValue) {
+
+                            $subItems = [];
+
+                            if(strpos($itemValue, ":")) {
+
+                                $subItems = explode(":", $itemValue);
+
+                                switch ($subItems[0]) {
+
+                                    case 'min':
+        
+                                        if (strlen($dataValue) < $subItems[1]) {
+        
+                                            $errors["$ruleKey"] = "o campo {$ruleKey} deve ter um minimo de {$items} caracteres";
+        
+                                            break;
+        
+                                        }
+        
+        
+                                    case 'max':
+        
+                                        if (strlen($dataValue) > $subItems[1]) {
+        
+                                            $errors["$ruleKey"] = "o campo {$ruleKey} deve ter um máximo de {$items} caracteres";
+        
+                                            break;
+        
+                                        }
+        
+        
+                                }
+
+                            } else {
+
+                                switch ($itemValue) {
+
+                                    case 'required' :
+        
+                                        if ($dataValue == ' ' || empty($dataValue)) {
+        
+                                            $errors["$ruleKey"] = "o campo {$ruleKey} deve ser preenchido.";
+        
+                                            break;
+        
+                                        }
+        
+                                        
+                                    case 'email' :
+        
+                                        if (!filter_var($dataValue, FILTER_VALIDATE_EMAIL)) {
+        
+                                            $errors["$ruleKey"] = "O campo {$ruleKey} não é valido.";
+        
+                                            break;
+                                            
+                                        }
+        
+                                        
+                                    case 'float' :
+        
+                                        if (!filter_var($dataValue, FILTER_VALIDATE_FLOAT)) {
+        
+                                            $errors["$ruleKey"] = "O campo {$ruleKey} deve conter números decimal";
+        
+                                            break;
+        
+                                        }
+        
+                                        
+        
+                                    case 'int' :
+        
+                                        if (!filter_var($dataValue, FILTER_VALIDATE_INT)) {
+        
+                                            $errors["$ruleKey"] = "O campo {$ruleKey} deve conter número inteiro";
+        
+                                            break;
+        
+                                        }
+        
+                                        
+        
+                                    default :
+        
+                                        break;
+        
+        
+                                }
+
+
+
+
+                            }
+                        }
+
+                    }elseif(strpos($ruleValue, ":")) {
+
+                        $items = explode(":", $ruleValue);
 
                         switch ($items[0]) {
-
 
                             case 'min':
 
@@ -47,16 +150,8 @@ class Validator
 
                         }
 
-                    }
-                }
-
-
-            } else {
- 
-                foreach ($data as $dataKey => $dataValue) {
-
-                    if ($ruleKey == $dataKey) {
-
+                    } else {
+        
                         switch ($ruleValue) {
 
                             case 'required' :
@@ -93,7 +188,7 @@ class Validator
 
                                 }
 
-                               
+                                
 
                             case 'int' :
 
@@ -113,6 +208,7 @@ class Validator
 
 
                         }
+
                     }
 
                 }
@@ -120,7 +216,6 @@ class Validator
             }
 
         }
-
 
         if ($errors) {
 
@@ -135,6 +230,6 @@ class Validator
 
         }
 
-
     }
+
 }
