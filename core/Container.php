@@ -28,8 +28,11 @@ class Container
             return require_once __DIR__ . "/../app/Views/404.phtml";
 
         } else {
-
+            
             echo "Error 404: Page not found!";
+            
         }
     } 
 }
+
+
