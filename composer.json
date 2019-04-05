@@ -1,10 +1,10 @@
 {
-  "name": "tjg/microframework",
+  "name": "microframework",
   "Description": "Micro Framewrok MVC",
   "license": "MIT",
   "type": "project",
   "authors": [
-    {"name": "Talles Gazel", "email": "tjgazel@gmail.com"}
+    {"name": "Samuel Xavier", "email": "sancrisxa@gmail.com"}
   ],
   "autoload":{
     "psr-4":{
