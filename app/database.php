@@ -2,25 +2,19 @@
 
 return [
 
-    /**
-     * Options (mysql, sqlite)
-     */
+    /* Options (mysql, sqlite) */
+    'driver' => 'sqlite',
 
-     'driver' => 'sqlite',
+    'sqlite' => [
+        'database' => 'database.db'
+    ],
 
-     'sqlite' => [
-
-        'host' => 'database.db'
-     ],
-
-     'mysql' => [
-
+    'mysql' => [
         'host' => 'localhost',
-        'database' => 'micro_framework',
+        'database' => 'curso_microframework',
         'user' => 'root',
-        'pass' => '',
+        'pass' => '123',
         'charset' => 'utf8',
-        'collation' => 'ut8_unicode_ci'
-     ]
-
+        'collation' => 'utf8_unicode_ci'
+    ]
 ];

@@ -6,11 +6,9 @@ use Core\BaseController;
 
 class HomeController extends BaseController
 {
-
-    public function index()
-    {
+    public function index(){
         $this->setPageTitle('Home');
-        $this->renderView("home/index", "layout");
+        $this->renderView('home/index', 'layout');
     }
 
 }

@@ -1,0 +1,2 @@
+﻿Este framework que desenvolvi foi feito com o intuito da aplicação dos principais conceitos envolvendo orientação a objetos, além das PSRs, e Design Patterns, ele foi feito em mvc seguindo a base do laravel, como querybuilder utilizei o eloquent que é o orm do próprio laravel com o intuito de simplicar as consultas.
+Ele é um blog, e como o foco era o desenvolvimento back-end só foi utilizado o bootstrap.

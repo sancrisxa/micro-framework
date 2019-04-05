@@ -2,6 +2,7 @@
 
 namespace Core;
 
+
 class Session
 {
     public static function set($key, $value)
@@ -11,29 +12,17 @@ class Session
 
     public static function get($key)
     {
-        
-        if (empty($_SESSION)) {
-
-            return false;
-
-        } else {
-
+        if(isset($_SESSION[$key]))
             return $_SESSION[$key];
-        }
 
-
-    
-    } 
+        return false;
+    }
 
     public static function destroy($keys)
     {
-        if (is_array($keys)) {
-
-            foreach ($keys as $key) {
-
+        if(is_array($keys))
+            foreach($keys as $key)
                 unset($_SESSION[$key]);
-            }
-        }
 
         unset($_SESSION[$keys]);
     }
